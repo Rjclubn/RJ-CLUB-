@@ -13,15 +13,3 @@ requiredFiles = [".replit", "replit.nix"]
 [deployment]
 run = ["python3", "main.py"]
 deploymentTarget = "cloudrun"
-
-[workflows]
-runButton = "Run Color Trading Game"
-
-[[workflows.workflow]]
-name = "Run Color Trading Game"
-author = 44629830
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python main.py"
