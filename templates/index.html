@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Trading - 91 Club Style</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">Color Trading</div>
+            <div class="user-info">
+                <span id="username"></span>
+                <span id="balance">₹0</span>
+            </div>
+        </header>
+
+        <!-- Join Game Modal -->
+        <div id="joinModal" class="modal">
+            <div class="modal-content">
+                <h2>Join Game</h2>
+                <input type="text" id="usernameInput" placeholder="Enter your username" maxlength="20">
+                <button onclick="joinGame()">Join</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="gameArea" style="display: none;">
+            <!-- Period and Timer -->
+            <div class="game-header">
+                <div class="period">Period: <span id="period">1</span></div>
+                <div class="timer">
+                    <span id="timeLeft">30</span>s
+                </div>
+            </div>
+
+            <!-- Result Display -->
+            <div class="result-area">
+                <div id="resultDisplay" class="result-display">
+                    <div class="result-number" id="resultNumber">?</div>
+                    <div class="result-color" id="resultColor"></div>
+                </div>
+            </div>
+
+            <!-- Betting Area -->
+            <div class="betting-area">
+                <h3>Select Color</h3>
+                <div class="color-buttons">
+                    <button class="bet-btn color-btn green" data-type="color" data-choice="green">
+                        <span>Green</span>
+                        <small>1:2</small>
+                    </button>
+                    <button class="bet-btn color-btn violet" data-type="color" data-choice="violet">
+                        <span>Violet</span>
+                        <small>1:4.5</small>
+                    </button>
+                    <button class="bet-btn color-btn red" data-type="color" data-choice="red">
+                        <span>Red</span>
+                        <small>1:2</small>
+                    </button>
+                </div>
+
+                <h3>Select Number</h3>
+                <div class="number-buttons">
+                    <button class="bet-btn number-btn" data-type="number" data-choice="0">0</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="1">1</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="2">2</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="3">3</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="4">4</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="5">5</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="6">6</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="7">7</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="8">8</button>
+                    <button class="bet-btn number-btn" data-type="number" data-choice="9">9</button>
+                </div>
+
+                <!-- Bet Amount Selection -->
+                <div class="bet-amount-area">
+                    <h3>Bet Amount</h3>
+                    <div class="amount-buttons">
+                        <button class="amount-btn" data-amount="10">₹10</button>
+                        <button class="amount-btn" data-amount="50">₹50</button>
+                        <button class="amount-btn" data-amount="100">₹100</button>
+                        <button class="amount-btn" data-amount="500">₹500</button>
+                    </div>
+                    <input type="number" id="customAmount" placeholder="Custom amount" min="1">
+                </div>
+
+                <!-- Confirm Bet -->
+                <div class="confirm-bet" id="confirmBet" style="display: none;">
+                    <div class="bet-summary">
+                        <span id="betSummary"></span>
+                    </div>
+                    <button id="confirmBetBtn" onclick="confirmBet()">Confirm Bet</button>
+                    <button onclick="cancelBet()">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Game Status -->
+            <div class="game-status">
+                <div id="gameStatus">Place your bets!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
